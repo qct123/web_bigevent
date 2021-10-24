@@ -33,11 +33,10 @@ function getUserInfo(){
             if(res.status !==0){
                 return layui.layer.msg('获取用户信息失败')
             }
-            // console.log(res);
-
+            // console.log(res);//{status: 0, message: '获取用户基本信息成功！', data: {…}}
             //自定义渲染用户头像的函数
             renderAvatar(res.data)
-        },    
+        }
         //挂载了，放到了baseAPI.js文件中
         /*♥♥♥♥♥♥♥♥♥ $.ajax()中的回调函数complete无论成功还是失败都会执行
         complete:function(res){
@@ -57,9 +56,10 @@ function getUserInfo(){
 function renderAvatar(data){
     //逻辑或，有nickname则name的值为nickname，没有就是username
     var name = data.nickname||data.username
+
     $('#welcome').html('欢迎&nbsp;&nbsp;'+name)
 
-    if(data.user_pic){   //如果有头像路径
+    if(data.user_pic!=null){   //如果有头像路径
         //渲染头像
         $('.layui-nav-img').attr('src',data.user_pic).show()
         $('.text-avatar').hide()
